@@ -1,0 +1,29 @@
+name: ecg-reconstruction
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - black
+  - black-jupyter
+  - h5py
+  - ipywidgets
+  - jupyterlab
+  - pip
+  - pylint
+  - tensorboard
+  - tensorflow
+  - pip:
+    - ipywidgets
+    - matplotlib
+    - neurokit2
+    - optuna
+    - optuna-dashboard
+    - pandas
+    - thop
+    - torch-tb-profiler
+    - scikit-learn
+    - scipy
+    - tqdm
+    - transformers
+

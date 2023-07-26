@@ -1,0 +1,65 @@
+accumulate_grad_batches: 8
+dataloader:
+  common:
+    batch_size: 256
+    num_workers: 6
+dataset:
+  common:
+    feature_scaling: false
+    filter_args:
+      N: 3
+      Wn: !!python/tuple
+      - 0.5
+      - 60
+      btype: bandpass
+    filter_type: butter
+    include_filtered_signal: false
+    include_labels: {}
+    include_original_signal: false
+    mean_normalization: true
+    predicate: null
+    signal_dtype: float32
+  eval:
+    hdf5_filename: ptb-xl/validation.hdf5
+  train:
+    hdf5_filename: ptb-xl/train.hdf5
+in_leads:
+- 0
+- 1
+- 8
+lr_scheduler:
+  args:
+    factor: 0.2605084006853945
+    patience: 2
+  type: ReduceLROnPlateau
+max_epochs: 8
+optimizer:
+  args:
+    betas:
+    - 0.9336483520329978
+    - 0.992049742047431
+    lr: 0.00046028859501896
+    weight_decay: 0.012631127295407558
+  type: AdamW
+out_leads:
+- 6
+- 7
+- 9
+- 10
+- 11
+reconstructor:
+  args:
+    dim_feedforward: 32
+    d_model: 96
+    dilation_rate: 3
+    # dropout: 0.2
+    dropout: 0.1
+    # in_leads: 3
+    kernel_size: 31
+    min_channels: 32
+    min_dilation: 1
+    unet_num_layers: 3
+    num_heads: 2
+    # out_leads: 5
+    transformer_num_layers: 2
+    bilinear: true

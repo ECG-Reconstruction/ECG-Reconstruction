@@ -1,0 +1,59 @@
+accumulate_grad_batches: 8
+dataloader:
+  common:
+    batch_size: 128
+    num_workers: 6
+dataset:
+  common:
+    feature_scaling: false
+    filter_args:
+      N: 3
+      Wn: !!python/tuple
+      - 0.5
+      - 60
+      btype: bandpass
+    filter_type: butter
+    include_filtered_signal: false
+    include_labels: {}
+    include_original_signal: false
+    mean_normalization: true
+    predicate: null
+    signal_dtype: float32
+  eval:
+    hdf5_filename: ptb-xl/validation.hdf5
+  train:
+    hdf5_filename: ptb-xl/train.hdf5
+in_leads:
+- 0
+- 1
+- 8
+lr_scheduler:
+  args:
+    T_0: 2
+    T_mult: 1
+  type: CosineAnnealingWarmRestarts
+max_epochs: 8
+optimizer:
+  args:
+    betas:
+    - 0.8840473941322693
+    - 0.9565645414946783
+    lr: 0.000752843601761964
+    weight_decay: 0.039157786682242214
+  type: AdamW
+out_leads:
+- 6
+- 7
+- 9
+- 10
+- 11
+reconstructor:
+  args:
+    base_channels: 32
+    bidirectional: false
+    dilation_scale: 2
+    kernel_size: 17
+    num_cnn_layers: 2
+    num_hidden: 48
+    num_lstm_layers: 2
+  type: !!python/name:ecg.reconstructor.lstm.lstm.CNNLSTM ''

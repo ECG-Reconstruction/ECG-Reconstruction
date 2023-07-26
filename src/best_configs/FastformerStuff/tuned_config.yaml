@@ -1,0 +1,67 @@
+accumulate_grad_batches: 8
+dataloader:
+  common:
+    batch_size: 128
+    num_workers: 6
+dataset:
+  common:
+    feature_scaling: false
+    filter_args:
+      N: 3
+      Wn: !!python/tuple
+      - 0.5
+      - 60
+      btype: bandpass
+    filter_type: butter
+    include_filtered_signal: false
+    include_labels: {}
+    include_original_signal: false
+    mean_normalization: true
+    predicate: null
+    signal_dtype: float32
+  eval:
+    hdf5_filename: ptb-xl/validation.hdf5
+  train:
+    hdf5_filename: ptb-xl/train.hdf5
+in_leads:
+- 0
+- 1
+- 8
+lr_scheduler:
+  args:
+    factor: 0.7120742502952482
+    patience: 3
+  type: ReduceLROnPlateau
+max_epochs: 8
+optimizer:
+  args:
+    betas:
+    - 0.9371313900734933
+    - 0.9675492630196634
+    lr: 0.00022889248606975892
+    weight_decay: 0.0006266790825840408
+  type: AdamW
+out_leads:
+- 6
+- 7
+- 9
+- 10
+- 11
+reconstructor:
+  args:
+    bert_config_dict:
+      enable_fp16: false
+      hidden_act: silu
+      # hidden_dropout_prob: 0.2
+      hidden_dropout_prob: 0.1
+      hidden_size: 96
+      initializer_range: 0.02
+      intermediate_size: 96
+      layer_norm_eps: 1.0e-12
+      max_position_embeddings: 8192
+      num_attention_heads: 4
+      num_hidden_layers: 4
+      pooler_type: weightpooler
+      type_vocab_size: 2
+      vocab_size: 100000
+  type: !!python/name:ecg.reconstructor.transformer.fastformer.FastformerPlus ''
